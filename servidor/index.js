@@ -21,7 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 /* =====================================================
    SESIONES
 ===================================================== */
-
+app.use((req, res, next) => {
+    console.log("📥 PETICIÓN:", req.method, req.url);
+    next();
+});
 app.use(session({
     secret: "kelly-nils-secreto",
     resave: false,
