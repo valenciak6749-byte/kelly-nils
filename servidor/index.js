@@ -9,7 +9,6 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-
 /* =====================================================
    CONFIGURACIÓN
 ===================================================== */
@@ -17,92 +16,93 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 /* =====================================================
-   SESIONES
+   LOG DE PETICIONES
 ===================================================== */
+
 app.use((req, res, next) => {
     console.log("📥 PETICIÓN:", req.method, req.url);
     next();
 });
-app.use(session({
-    secret: "kelly-nils-secreto",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true
-    }
-}));
-
 
 /* =====================================================
-   CONEXIÓN CON MYSQL
+   SESIONES
 ===================================================== */
 
-const db = mysql.createConnection({
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || "kelly-nils-secreto",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true
+        }
+    })
+);
+
+/* =====================================================
+   MYSQL
+===================================================== */
+
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: Number(process.env.DB_PORT)
+    port: Number(process.env.DB_PORT) || 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-db.connect((error) => {
-
+db.getConnection((error, connection) => {
     if (error) {
-
-        console.log(
-            "❌ Error conectando a MySQL:",
-            error.message
-        );
-
+        console.log("❌ Error conectando a MySQL:", error.message);
         return;
     }
 
-    console.log(
-        "✅ Conectado a MySQL correctamente"
-    );
-
+    console.log("✅ Conectado a MySQL correctamente");
+    connection.release();
 });
 
+/* =====================================================
+   PRUEBA DEL SERVIDOR
+===================================================== */
+
+app.get("/api/prueba", (req, res) => {
+    res.json({
+        correcto: true,
+        mensaje: "Servidor de Kelly Nils funcionando"
+    });
+});
 
 /* =====================================================
    VERIFICAR SESIÓN
 ===================================================== */
 
 function verificarSesion(req, res, next) {
-
     if (!req.session.usuario) {
-
         return res.status(401).json({
             mensaje: "No autorizado"
         });
-
     }
 
     next();
-
 }
 
-
 /* =====================================================
-   PROTEGER ADMIN.HTML
+   PROTEGER ADMIN
 ===================================================== */
 
 app.get("/admin.html", (req, res) => {
-
     if (!req.session.usuario) {
-
         return res.redirect("/login.html");
-
     }
 
     res.sendFile(
         path.join(__dirname, "..", "admin.html")
     );
-
 });
-
 
 /* =====================================================
    GUARDAR CITA
@@ -118,13 +118,25 @@ app.post("/api/citas", (req, res) => {
         hora
     } = req.body;
 
+    console.log("📋 Datos de cita recibidos:", {
+        nombre,
+        telefono,
+        servicio,
+        fecha,
+        hora
+    });
+
+    if (!nombre || !telefono || !servicio || !fecha || !hora) {
+        return res.status(400).json({
+            mensaje: "Faltan datos para crear la cita"
+        });
+    }
 
     const sql = `
         INSERT INTO citas
         (nombre, telefono, servicio, fecha, hora)
         VALUES (?, ?, ?, ?, ?)
     `;
-
 
     db.query(
         sql,
@@ -138,39 +150,29 @@ app.post("/api/citas", (req, res) => {
         (error, resultado) => {
 
             if (error) {
-
                 console.log(
-                    "❌ Error guardando la cita:",
+                    "❌ ERROR MYSQL AL GUARDAR:",
                     error.message
                 );
 
                 return res.status(500).json({
-                    mensaje: "No se pudo guardar la cita"
+                    mensaje: "No se pudo guardar la cita",
+                    error: error.message
                 });
-
             }
 
-
             console.log(
-                "✅ Cita guardada correctamente"
+                "✅ Cita guardada correctamente. ID:",
+                resultado.insertId
             );
 
-
             res.json({
-
-                mensaje:
-                    "Cita guardada correctamente",
-
-                id:
-                    resultado.insertId
-
+                mensaje: "Cita guardada correctamente",
+                id: resultado.insertId
             });
-
         }
     );
-
 });
-
 
 /* =====================================================
    OBTENER CITAS
@@ -187,36 +189,26 @@ app.get(
             ORDER BY fecha ASC, hora ASC
         `;
 
-
         db.query(
             sql,
             (error, resultados) => {
 
                 if (error) {
-
                     console.log(
                         "❌ Error obteniendo las citas:",
                         error.message
                     );
 
                     return res.status(500).json({
-
-                        mensaje:
-                            "No se pudieron obtener las citas"
-
+                        mensaje: "No se pudieron obtener las citas"
                     });
-
                 }
 
-
                 res.json(resultados);
-
             }
         );
-
     }
 );
-
 
 /* =====================================================
    LOGIN
@@ -229,43 +221,37 @@ app.post("/api/login", (req, res) => {
         password
     } = req.body;
 
+    const usuarioCorrecto =
+        process.env.ADMIN_USER;
 
-   const usuarioCorrecto =
-    process.env.ADMIN_USER;
-
-const passwordCorrecta =
-    process.env.ADMIN_PASSWORD;
+    const passwordCorrecta =
+        process.env.ADMIN_PASSWORD;
 
     if (
         usuario === usuarioCorrecto &&
         password === passwordCorrecta
     ) {
 
-        req.session.usuario =
-            usuario;
+        req.session.usuario = usuario;
 
-
-        res.json({
-
+        return res.json({
             correcto: true
-
         });
-
-    } else {
-
-        res.json({
-
-            correcto: false
-
-        });
-
     }
 
+    res.json({
+        correcto: false
+    });
 });
 
-/* LOGOUT */
+/* =====================================================
+   LOGOUT
+===================================================== */
+
 app.post("/api/logout", (req, res) => {
+
     req.session.destroy((error) => {
+
         if (error) {
             return res.status(500).json({
                 mensaje: "No se pudo cerrar sesión"
@@ -278,9 +264,8 @@ app.post("/api/logout", (req, res) => {
     });
 });
 
-
 /* =====================================================
-   CONFIRMAR / CANCELAR CITA
+   ACTUALIZAR ESTADO DE CITA
 ===================================================== */
 
 app.put(
@@ -288,14 +273,8 @@ app.put(
     verificarSesion,
     (req, res) => {
 
-        const {
-            estado
-        } = req.body;
-
-        const {
-            id
-        } = req.params;
-
+        const { estado } = req.body;
+        const { id } = req.params;
 
         const sql = `
             UPDATE citas
@@ -303,45 +282,29 @@ app.put(
             WHERE id = ?
         `;
 
-
         db.query(
             sql,
-            [
-                estado,
-                id
-            ],
-            (error, resultado) => {
+            [estado, id],
+            (error) => {
 
                 if (error) {
-
                     console.log(
                         "❌ Error actualizando la cita:",
                         error.message
                     );
 
                     return res.status(500).json({
-
-                        mensaje:
-                            "No se pudo actualizar la cita"
-
+                        mensaje: "No se pudo actualizar la cita"
                     });
-
                 }
 
-
                 res.json({
-
-                    mensaje:
-                        "Cita actualizada correctamente"
-
+                    mensaje: "Cita actualizada correctamente"
                 });
-
             }
         );
-
     }
 );
-
 
 /* =====================================================
    ELIMINAR CITA
@@ -352,43 +315,36 @@ app.delete(
     verificarSesion,
     (req, res) => {
 
-        const {
-            id
-        } = req.params;
-
+        const { id } = req.params;
 
         const sql = `
             DELETE FROM citas
             WHERE id = ?
         `;
 
-
         db.query(
             sql,
             [id],
-            (error, resultado) => {
+            (error) => {
 
-         if (error) {
-    console.log("❌ ERROR MYSQL:", error);
-    return res.status(500).json({
-        mensaje: "No se pudo guardar la cita",
-        error: error.message
-    });
-}
+                if (error) {
+                    console.log(
+                        "❌ Error eliminando la cita:",
+                        error.message
+                    );
+
+                    return res.status(500).json({
+                        mensaje: "No se pudo eliminar la cita"
+                    });
+                }
 
                 res.json({
-
-                    mensaje:
-                        "Cita eliminada correctamente"
-
+                    mensaje: "Cita eliminada correctamente"
                 });
-
             }
         );
-
     }
 );
-
 
 /* =====================================================
    ARCHIVOS DE LA PÁGINA
@@ -400,6 +356,21 @@ app.use(
     )
 );
 
+/* =====================================================
+   ERROR GENERAL
+===================================================== */
+
+app.use((error, req, res, next) => {
+
+    console.log(
+        "❌ ERROR GENERAL DEL SERVIDOR:",
+        error
+    );
+
+    res.status(500).json({
+        mensaje: "Error interno del servidor"
+    });
+});
 
 /* =====================================================
    INICIAR SERVIDOR
