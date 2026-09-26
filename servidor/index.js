@@ -365,22 +365,13 @@ app.delete(
             [id],
             (error, resultado) => {
 
-                if (error) {
-
-                    console.log(
-                        "❌ Error eliminando la cita:",
-                        error.message
-                    );
-
-                    return res.status(500).json({
-
-                        mensaje:
-                            "No se pudo eliminar la cita"
-
-                    });
-
-                }
-
+         if (error) {
+    console.log("❌ ERROR MYSQL:", error);
+    return res.status(500).json({
+        mensaje: "No se pudo guardar la cita",
+        error: error.message
+    });
+}
 
                 res.json({
 
