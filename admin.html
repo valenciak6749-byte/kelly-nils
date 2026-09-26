@@ -1,0 +1,423 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelly Nils | Panel</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fff7f8;
+            font-family: Arial, sans-serif;
+            color: #3c3033;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        header h1 {
+            margin: 0;
+            color: #9f6374;
+            font-size: 22px;
+        }
+
+        .cerrar-sesion {
+            border: none;
+            background: #9f6374;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .titulo {
+            margin-bottom: 25px;
+        }
+
+        .titulo h2 {
+            margin-bottom: 5px;
+        }
+
+        .titulo p {
+            color: #76676b;
+        }
+
+        #listaCitas {
+            display: grid;
+            gap: 20px;
+        }
+
+        .cita {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        .cita h3 {
+            margin-top: 0;
+            color: #9f6374;
+        }
+
+        .dato {
+            margin: 8px 0;
+        }
+
+        .estado {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #f8e9ed;
+            color: #9f6374;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .botones button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-confirmar {
+            background: #f3e7ea;
+            color: #9f6374;
+        }
+
+        .btn-cancelar {
+            background: #eeeeee;
+            color: #555;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .sin-citas {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 18px;
+            }
+
+            .cerrar-sesion {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            main {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .botones button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>💅🏻 Kelly Nils</h1>
+
+        <button
+            class="cerrar-sesion"
+            onclick="cerrarSesion()"
+        >
+            Cerrar sesión
+        </button>
+
+    </header>
+
+
+    <main>
+
+        <div class="titulo">
+
+            <h2>Mis citas</h2>
+
+            <p>
+                Aquí puedes consultar las citas de tus clientas.
+            </p>
+
+        </div>
+
+        <div id="listaCitas"></div>
+
+    </main>
+
+
+      <script>
+
+        async function cargarCitas() {
+
+            const lista = document.getElementById("listaCitas");
+
+            try {
+
+                const respuesta = await fetch("/api/citas");
+                const citas = await respuesta.json();
+
+                lista.innerHTML = "";
+
+                if (citas.length === 0) {
+
+                    lista.innerHTML = `
+                        <div class="sin-citas">
+                            <h3>💅🏻 No hay citas todavía</h3>
+                            <p>Cuando una clienta solicite una cita, aparecerá aquí.</p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                citas.forEach(cita => {
+
+                    const tarjeta = document.createElement("div");
+
+                    tarjeta.className = "cita";
+
+                    tarjeta.innerHTML = `
+                        <h3>👤 ${cita.nombre}</h3>
+
+                        <p class="dato">
+                            📱 <strong>WhatsApp:</strong> ${cita.telefono}
+                        </p>
+
+                        <p class="dato">
+                            💅🏻 <strong>Servicio:</strong> ${cita.servicio}
+                        </p>
+
+                        <p class="dato">
+                            📅 <strong>Fecha:</strong> ${cita.fecha}
+                        </p>
+
+                        <p class="dato">
+                            ⏰ <strong>Hora:</strong> ${cita.hora}
+                        </p>
+
+                        <span class="estado">
+                            📌 ${cita.estado}
+                        </span>
+
+                        <div class="botones">
+
+                            <button onclick="cambiarEstado(${cita.id}, 'Confirmada')">
+                                ✅ Confirmar
+                            </button>
+
+                            <button onclick="cambiarEstado(${cita.id}, 'Cancelada')">
+                                ❌ Cancelar
+                            </button>
+
+                            <button onclick="abrirWhatsApp('${cita.telefono}', '${cita.nombre}')">
+                                💬 WhatsApp
+                            </button>
+                            <button
+                                    onclick="eliminarCita(${cita.id})"
+                                    style="
+                                         background: #333;
+                                         color: white;
+                                         padding: 10px 14px;
+                                        border: none;
+                                        border-radius: 8px;
+                                         cursor: pointer;
+                                        font-weight: bold;
+                                 "  
+                          >
+                                🗑️ Eliminar
+                          </button>
+
+                        </div>
+                    `;
+
+                    lista.appendChild(tarjeta);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                lista.innerHTML = `
+                    <div class="sin-citas">
+                        ❌ No se pudieron cargar las citas.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+         async function cerrarSesion() {
+    try {
+        await fetch("/api/logout", {
+            method: "POST"
+        });
+
+        window.location.href = "/login.html";
+
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo cerrar sesión ❌");
+    }
+}
+        
+
+
+        async function cambiarEstado(id, estado) {
+
+            try {
+
+                const respuesta = await fetch("/api/citas/" + id, {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        estado: estado
+                    })
+
+                });
+
+                const resultado = await respuesta.json();
+
+                console.log(resultado);
+
+                await cargarCitas();
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("No se pudo actualizar la cita ❌");
+
+            }
+
+        }
+
+
+        function abrirWhatsApp(telefono, nombre) {
+
+            let numero = String(telefono).replace(/\D/g, "");
+
+            if (numero.startsWith("0")) {
+                numero = "57" + numero.substring(1);
+            }
+
+            if (!numero.startsWith("57")) {
+                numero = "57" + numero;
+            }
+
+            const mensaje =
+                "Hola " + nombre +
+                ", soy Kelly de Kelly Nils 💅🏻. " +
+                "Te escribo para hablar sobre tu cita de uñas. ❤️";
+
+            const url =
+                "https://wa.me/" +
+                numero +
+                "?text=" +
+                encodeURIComponent(mensaje);
+
+            window.open(url, "_blank");
+
+        }
+        async function eliminarCita(id) {
+
+    const confirmar = confirm(
+        "¿Seguro que quieres eliminar esta cita? 🗑️"
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        const respuesta = await fetch(
+            "/api/citas/" + id,
+            {
+                method: "DELETE"
+            }
+        );
+
+        const resultado = await respuesta.json();
+
+        console.log(resultado);
+
+        await cargarCitas();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("No se pudo eliminar la cita ❌");
+
+    }
+
+}
+
+
+        cargarCitas();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelly Nils | Iniciar sesión</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff5f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .login {
+            width: 90%;
+            max-width: 380px;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.10);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #9f6374;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #76676b;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #eadadd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #9f6374;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login">
+
+        <h1>Kelly Nils </h1>
+
+        <p>Panel privado</p>
+
+        <form id="loginForm">
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Usuario"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Contraseña"
+                required
+            >
+
+            <button type="submit">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", async (evento) => {
+
+                evento.preventDefault();
+
+                const usuario =
+                    document.getElementById("usuario").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+
+                const respuesta = await fetch("/api/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        usuario,
+                        password
+                    })
+
+                });
+
+
+                const resultado =
+                    await respuesta.json();
+
+
+                if (resultado.correcto) {
+
+                    window.location.href = "/admin.html";
+
+                } else {
+
+                    alert("Usuario o contraseña incorrectos ❌");
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

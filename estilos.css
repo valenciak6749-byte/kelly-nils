@@ -1,0 +1,1213 @@
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --rosa: #c98b9b;
+    --rosa-oscuro: #9f6374;
+    --rosa-claro: #f8e9ed;
+    --crema: #fffaf7;
+    --blanco: #ffffff;
+    --texto: #3c3033;
+    --texto-claro: #76676b;
+    --borde: #eadadd;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255, 250, 247, 0.92);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(234, 218, 221, 0.7);
+
+    z-index: 1000;
+}
+
+.logo {
+    font-family: "DM Serif Display", serif;
+    font-size: 28px;
+    color: var(--texto);
+}
+
+.logo span {
+    color: var(--rosa-oscuro);
+}
+
+.navbar {
+    display: flex;
+    gap: 32px;
+}
+
+.navbar a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--texto-claro);
+
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: var(--rosa-oscuro);
+}
+
+.btn-cita {
+    padding: 12px 22px;
+
+    background: var(--rosa-oscuro);
+    color: white;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-cita:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(159, 99, 116, 0.25);
+}
+
+.menu-btn {
+    display: none;
+
+    border: none;
+    background: none;
+
+    font-size: 23px;
+    color: var(--texto);
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+.inicio {
+    min-height: 100vh;
+
+    padding: 150px 9% 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 70px;
+}
+
+.inicio-contenido {
+    max-width: 570px;
+}
+
+.subtitulo {
+    color: var(--rosa-oscuro);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+}
+
+.inicio h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(55px, 7vw, 90px);
+
+    line-height: 0.98;
+
+    font-weight: 400;
+
+    margin-bottom: 28px;
+}
+
+.inicio h1 span {
+    color: var(--rosa-oscuro);
+    font-style: italic;
+}
+
+.descripcion {
+    max-width: 500px;
+
+    color: var(--texto-claro);
+
+    font-size: 15px;
+    line-height: 1.9;
+
+    margin-bottom: 35px;
+}
+
+.botones {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-principal {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 24px;
+
+    border: none;
+
+    background: var(--rosa-oscuro);
+    color: white;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-principal:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 30px rgba(159, 99, 116, 0.25);
+}
+
+.btn-secundario {
+    padding: 13px 24px;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-secundario:hover {
+    border-color: var(--rosa);
+    color: var(--rosa-oscuro);
+}
+
+
+/* =====================================================
+   IMAGEN PRINCIPAL
+===================================================== */
+
+.inicio-imagen {
+    position: relative;
+
+    width: 45%;
+    max-width: 500px;
+}
+
+.imagen-marco {
+    position: relative;
+
+    width: 100%;
+    height: 600px;
+
+    border-radius: 250px 250px 25px 25px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 70px rgba(80, 50, 60, 0.15);
+}
+
+.imagen-marco img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.6s;
+}
+
+.imagen-marco:hover img {
+    transform: scale(1.05);
+}
+
+.decoracion {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow: 0 15px 30px rgba(60, 40, 45, 0.12);
+
+    color: var(--rosa-oscuro);
+
+    font-size: 20px;
+}
+
+.decoracion-1 {
+    left: -30px;
+    top: 100px;
+}
+
+.decoracion-2 {
+    right: -25px;
+    bottom: 100px;
+}
+
+
+/* =====================================================
+   TÍTULOS
+===================================================== */
+
+.titulo-seccion {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.titulo-seccion p {
+    color: var(--rosa-oscuro);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.titulo-seccion h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 48px;
+
+    font-weight: 400;
+}
+
+.titulo-seccion h2 span {
+    color: var(--rosa-oscuro);
+    font-style: italic;
+}
+
+.linea {
+    width: 45px;
+    height: 2px;
+
+    background: var(--rosa);
+
+    margin: 18px auto 0;
+}
+
+
+/* =====================================================
+   SERVICIOS
+===================================================== */
+
+.servicios {
+    padding: 110px 9%;
+
+    background: white;
+}
+
+.servicios-contenedor {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    max-width: 1150px;
+
+    margin: auto;
+}
+
+.servicio {
+    padding: 40px 30px;
+
+    text-align: center;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 20px;
+
+    background: var(--crema);
+
+    transition: 0.4s;
+}
+
+.servicio:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 20px 40px rgba(80, 50, 60, 0.08);
+}
+
+.servicio.destacado {
+    background: var(--rosa-claro);
+
+    border-color: transparent;
+}
+
+.icono-servicio {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: var(--rosa-oscuro);
+
+    font-size: 22px;
+}
+
+.servicio h3 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    margin-bottom: 15px;
+}
+
+.servicio p {
+    color: var(--texto-claro);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+}
+
+.precio {
+    color: var(--rosa-oscuro);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+/* =====================================================
+   GALERÍA — MEJORAS
+===================================================== */
+
+.galeria-descripcion {
+    max-width: 550px;
+
+    margin: 15px auto 0;
+
+    color: var(--texto-claro);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+.foto {
+    position: relative;
+}
+
+.foto-overlay {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 20px;
+
+    background: linear-gradient(
+        transparent,
+        rgba(30, 20, 25, 0.65)
+    );
+
+    color: white;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    transition: 0.4s;
+}
+
+.foto:hover .foto-overlay {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.foto-overlay span {
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+.galeria-final {
+    text-align: center;
+
+    margin-top: 40px;
+}
+
+.galeria-final p {
+    color: var(--texto-claro);
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+  
+
+
+/* =====================================================
+   SOBRE MÍ
+===================================================== */
+
+.nosotros {
+    padding: 110px 9%;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 90px;
+}
+
+.nosotros-imagen {
+    width: 420px;
+    height: 520px;
+
+    overflow: hidden;
+
+    border-radius: 220px 220px 20px 20px;
+}
+
+.nosotros-imagen img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.nosotros-contenido {
+    max-width: 520px;
+}
+
+.nosotros-contenido h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 55px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    margin-bottom: 25px;
+}
+
+.nosotros-contenido h2 span {
+    color: var(--rosa-oscuro);
+}
+
+.nosotros-contenido p:not(.subtitulo) {
+    color: var(--texto-claro);
+
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   CITAS
+===================================================== */
+
+.citas {
+    padding: 110px 9%;
+}
+
+.formulario-contenedor {
+    max-width: 750px;
+
+    margin: auto;
+
+    padding: 45px;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 60px rgba(80, 50, 60, 0.08);
+}
+
+#formularioCita {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+}
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.campo label {
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: var(--texto);
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: var(--crema);
+
+    color: var(--texto);
+
+    transition: 0.3s;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: var(--rosa);
+
+    box-shadow:
+        0 0 0 3px rgba(201, 139, 155, 0.12);
+}
+
+#formularioCita button {
+    grid-column: 1 / -1;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   CONTACTO
+===================================================== */
+
+.contacto {
+    padding: 100px 9%;
+
+    background: var(--rosa-claro);
+
+    text-align: center;
+}
+
+.contacto-contenido {
+    max-width: 650px;
+
+    margin: auto;
+}
+
+.contacto h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 60px;
+
+    font-weight: 400;
+
+    margin-bottom: 20px;
+}
+
+.contacto p:not(.subtitulo) {
+    color: var(--texto-claro);
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 40px 9%;
+
+    background: #34282c;
+
+    color: white;
+
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+}
+
+.redes {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.redes a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    transition: 0.3s;
+}
+
+.redes a:hover {
+    background: var(--rosa);
+
+    transform: translateY(-4px);
+}
+
+footer p {
+    font-size: 11px;
+
+    color: #cfc3c6;
+}
+
+
+/* =====================================================
+   ANIMACIONES
+===================================================== */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.inicio-contenido {
+    animation: aparecer 1s ease;
+}
+
+.inicio-imagen {
+    animation: aparecer 1s ease 0.2s both;
+}
+
+
+/* =====================================================
+   RESPONSIVE — TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .header {
+        padding: 0 5%;
+    }
+
+    .navbar {
+        gap: 18px;
+    }
+
+    .inicio {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .inicio h1 {
+        font-size: 65px;
+    }
+
+    .servicios {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .galeria {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .nosotros {
+        padding-left: 6%;
+        padding-right: 6%;
+        gap: 50px;
+    }
+
+    .nosotros-imagen {
+        width: 350px;
+        height: 450px;
+    }
+
+}
+
+/* =====================================================
+   TARJETA SOBRE KELLY
+===================================================== */
+
+.nosotros-imagen {
+    position: relative;
+}
+
+.experiencia {
+    position: absolute;
+
+    right: -35px;
+    bottom: 35px;
+
+    width: 150px;
+    padding: 18px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 15px 35px rgba(60, 40, 45, 0.12);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    animation: flotar 3s ease-in-out infinite;
+}
+
+.experiencia span {
+    font-size: 25px;
+}
+
+.experiencia p {
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: var(--texto);
+
+    margin: 0 !important;
+}
+
+
+/* =====================================================
+   FRASE DE KELLY
+===================================================== */
+
+.frase-kelly {
+
+    margin: 25px 0;
+
+    padding: 20px 22px;
+
+    background: var(--rosa-claro);
+
+    border-left: 3px solid var(--rosa-oscuro);
+
+    border-radius: 0 12px 12px 0;
+
+}
+
+.frase-kelly i {
+
+    color: var(--rosa-oscuro);
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+
+}
+
+.frase-kelly p {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 17px !important;
+
+    font-style: italic;
+
+    margin: 0 !important;
+
+    color: var(--texto) !important;
+
+}
+
+
+/* =====================================================
+   ANIMACIÓN TARJETA
+===================================================== */
+
+@keyframes flotar {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE — CELULAR
+===================================================== */
+
+@media (max-width: 750px) {
+    .experiencia {
+        right: 10px;
+        bottom: 20px;
+    }
+
+    .header {
+        height: 70px;
+    }
+
+    .navbar {
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 20px;
+
+        background: var(--crema);
+
+        display: none;
+
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 20px;
+
+        border-bottom: 1px solid var(--borde);
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .btn-cita {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .inicio {
+        padding: 120px 6% 70px;
+
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 50px;
+    }
+
+    .inicio-contenido {
+        max-width: 100%;
+    }
+
+    .inicio h1 {
+        font-size: 58px;
+    }
+
+    .descripcion {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .botones {
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .inicio-imagen {
+        width: 85%;
+
+        max-width: 380px;
+    }
+
+    .imagen-marco {
+        height: 470px;
+    }
+
+    .servicios {
+        padding: 80px 6%;
+    }
+
+    .titulo-seccion h2 {
+        font-size: 40px;
+    }
+
+    .servicios-contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .galeria {
+        padding: 80px 6%;
+    }
+
+    .galeria-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .foto {
+        height: 280px;
+    }
+
+    .nosotros {
+        padding: 80px 6%;
+
+        flex-direction: column;
+    }
+
+    .nosotros-imagen {
+        width: 85%;
+        max-width: 380px;
+
+        height: 450px;
+    }
+
+    .nosotros-contenido {
+        text-align: center;
+    }
+
+    .nosotros-contenido h2 {
+        font-size: 48px;
+    }
+
+    .citas {
+        padding: 80px 6%;
+    }
+
+    .formulario-contenedor {
+        padding: 25px;
+    }
+
+    #formularioCita {
+        grid-template-columns: 1fr;
+    }
+
+    #formularioCita button {
+        grid-column: auto;
+    }
+
+    .contacto {
+        padding: 80px 6%;
+    }
+
+    .contacto h2 {
+        font-size: 50px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULARES PEQUEÑOS
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .inicio h1 {
+        font-size: 48px;
+    }
+
+    .inicio-imagen {
+        width: 90%;
+    }
+
+    .imagen-marco {
+        height: 420px;
+    }
+
+    .galeria-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foto {
+        height: 400px;
+    }
+
+    .nosotros-imagen {
+        width: 90%;
+        height: 420px;
+    }
+
+    .nosotros-contenido h2 {
+        font-size: 42px;
+    }
+
+}
+
+/* ================= VISOR DE FOTOS ================= */
+
+.visor-foto {
+    position: fixed;
+    inset: 0;
+    background: rgba(25, 15, 20, 0.90);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s;
+
+    z-index: 9999;
+
+    padding: 30px;
+}
+
+.visor-foto.activo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.visor-foto img {
+    max-width: 90%;
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 15px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+
+    transform: scale(0.8);
+
+    transition: 0.3s;
+}
+
+.visor-foto.activo img {
+    transform: scale(1);
+}
+
+.cerrar-foto {
+    position: absolute;
+
+    top: 25px;
+    right: 35px;
+
+    color: white;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    transition: 0.3s;
+}
+
+.cerrar-foto:hover {
+    transform: rotate(90deg);
+}

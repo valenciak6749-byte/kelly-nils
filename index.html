@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelly Nils | Nail Studio</title>
+
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <a href="#" class="logo">
+            <span>K</span> Kelly Nils
+        </a>
+
+        <nav class="navbar">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Galería</a>
+            <a href="#nosotros">Sobre mí</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <a href="#citas" class="btn-cita">
+            Agendar cita
+        </a>
+
+        <button class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </header>
+
+
+    <!-- ================= INICIO ================= -->
+
+    <section class="inicio" id="inicio">
+
+        <div class="inicio-contenido">
+
+            <p class="subtitulo">
+                ✦ NAIL STUDIO ✦
+            </p>
+
+            <h1>
+                Belleza en cada
+                <span>detalle.</span>
+            </h1>
+
+            <p class="descripcion">
+                Diseños únicos, delicados y hechos con mucho amor.
+                Descubre un espacio creado para resaltar tu estilo
+                y hacerte sentir increíble.
+            </p>
+
+            <div class="botones">
+
+                <a href="#servicios" class="btn-principal">
+                    Ver servicios
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="#galeria" class="btn-secundario">
+                    Ver trabajos
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="inicio-imagen">
+
+            <div class="imagen-marco">
+                <img src="img/portada.jpg" alt="Diseño de uñas">
+            </div>
+
+            <div class="decoracion decoracion-1">
+                <i class="fa-regular fa-star"></i>
+            </div>
+
+            <div class="decoracion decoracion-2">
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICIOS ================= -->
+
+    <section class="servicios" id="servicios">
+
+        <div class="titulo-seccion">
+
+            <p>LO QUE OFRECEMOS</p>
+
+            <h2>
+                Nuestros <span>servicios</span>
+            </h2>
+
+            <div class="linea"></div>
+
+        </div>
+
+
+        <div class="servicios-contenedor">
+
+            <div class="servicio">
+
+                <div class="icono-servicio">
+                    <i class="fa-regular fa-hand"></i>
+                </div>
+
+                <h3>Manicure</h3>
+
+                <p>
+                    Cuidado y embellecimiento de tus uñas
+                    para mantenerlas lindas y saludables.
+                </p>
+
+                <span class="precio">
+                    Desde $20.000
+                </span>
+
+            </div>
+
+
+            <div class="servicio destacado">
+
+                <div class="icono-servicio">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+
+                <h3>Semipermanente</h3>
+
+                <p>
+                    Color y brillo duradero para lucir
+                    unas uñas increíbles durante más tiempo.
+                </p>
+
+                <span class="precio">
+                    Desde $30.000
+                </span>
+
+            </div>
+
+
+            <div class="servicio">
+
+                <div class="icono-servicio">
+                    <i class="fa-regular fa-gem"></i>
+                </div>
+
+                <h3>Diseños personalizados</h3>
+
+                <p>
+                    Diseños creados especialmente para
+                    expresar tu personalidad y estilo.
+                </p>
+
+                <span class="precio">
+                    Desde $35.000
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= GALERÍA ================= -->
+
+<section class="galeria" id="galeria">
+
+    <div class="titulo-seccion">
+
+        <p>TRABAJOS DE KELLY</p>
+
+        <h2>
+            Creaciones hechas con <span>amor</span>
+        </h2>
+
+        <div class="linea"></div>
+
+        <p class="galeria-descripcion">
+            Un pequeño vistazo a mi proceso y a los diseños
+            que voy creando mientras sigo aprendiendo.
+        </p>
+
+    </div>
+
+
+    <div class="galeria-grid">
+
+        <div class="foto">
+            <img src="img/trabajos/uñas1.jpg" alt="Trabajo de uñas realizado por Kelly" onclick="abrirFoto(this)">
+
+            <div class="foto-overlay">
+                <span>Diseño #01</span>
+            </div>
+        </div>
+
+
+        <div class="foto">
+            <img src="img/trabajos/uñas2.jpg" alt="Trabajo de uñas realizado por Kelly" onclick="abrirFoto(this)">
+
+            <div class="foto-overlay">
+                <span>Diseño #02</span>
+            </div>
+        </div>
+
+
+        <div class="foto">
+            <img src="img/trabajos/uñas3.jpg" alt="Trabajo de uñas realizado por Kelly" onclick="abrirFoto(this)">
+
+            <div class="foto-overlay">
+                <span>Diseño #03</span>
+            </div>
+        </div>
+
+
+        <div class="foto">
+            <img src="img/trabajos/uñas4.jpg" alt="Trabajo de uñas realizado por Kelly" onclick="abrirFoto(this)">
+
+            <div class="foto-overlay">
+                <span>Diseño #04</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="galeria-final">
+
+        <p>
+            ¿Te gusta alguno de mis diseños?
+        </p>
+
+        <a href="#citas" class="btn-secundario">
+            Preguntar por una cita
+        </a>
+
+    </div>
+
+</section>
+
+
+    
+
+   <!-- ================= SOBRE KELLY ================= -->
+
+<section class="nosotros" id="nosotros">
+
+    <div class="nosotros-imagen">
+
+        <img src="img/sobre-mi.jpg" alt="Kelly - Kelly Nils">
+
+        <div class="experiencia">
+            <span>💅🏻</span>
+            <p>
+                Creciendo<br>
+                paso a paso
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="nosotros-contenido">
+
+        <p class="subtitulo">
+            CONOCE A KELLY
+        </p>
+
+        <h2>
+            Una pasión que
+            <span>apenas comienza.</span>
+        </h2>
+
+        <p>
+            Soy Kelly y estoy comenzando mi camino en el
+            mundo de las uñas. Cada diseño, cada práctica
+            y cada nuevo aprendizaje hacen parte de este
+            sueño que estoy construyendo poco a poco.
+        </p>
+
+        <p>
+            Mi objetivo es seguir aprendiendo, mejorar cada
+            día y crear diseños que hagan sentir especiales
+            a las personas que confían en mí.
+        </p>
+
+        <div class="frase-kelly">
+
+            <i class="fa-solid fa-quote-left"></i>
+
+            <p>
+                "Todo gran sueño comienza con un pequeño paso."
+            </p>
+
+        </div>
+
+        <a href="#citas" class="btn-principal">
+            Quiero una cita
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+    <!-- ================= CITAS ================= -->
+
+    <section class="citas" id="citas">
+
+        <div class="titulo-seccion">
+
+            <p>RESERVA TU ESPACIO</p>
+
+            <h2>
+                Agenda tu <span>cita</span>
+            </h2>
+
+            <div class="linea"></div>
+
+        </div>
+
+
+        <div class="formulario-contenedor">
+
+            <form id="formularioCita">
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Tu nombre"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="telefono">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        placeholder="Tu número"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="servicio">
+                        Servicio
+                    </label>
+
+                    <select id="servicio" required>
+
+                        <option value="">
+                            Selecciona un servicio
+                        </option>
+
+                        <option value="Manicure">
+                            Manicure
+                        </option>
+
+                        <option value="Semipermanente">
+                            Semipermanente
+                        </option>
+
+                        <option value="Diseño personalizado">
+                            Diseño personalizado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="fecha">
+                        Fecha
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fecha"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="hora">
+                        Hora
+                    </label>
+
+                    <input
+                        type="time"
+                        id="hora"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="btn-principal">
+                    Solicitar cita
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACTO ================= -->
+
+    <section class="contacto" id="contacto">
+
+        <div class="contacto-contenido">
+
+            <p class="subtitulo">
+                ¿TIENES ALGUNA PREGUNTA?
+            </p>
+
+            <h2>
+                Hablemos 
+            </h2>
+
+            <p>
+                Escríbeme por WhatsApp y te ayudaré a elegir
+                el servicio perfecto para ti.
+            </p>
+
+            <a href="#" class="btn-principal" id="whatsappBtn">
+                Escribir por WhatsApp
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Nail Studio
+        </div>
+
+        <div class="redes">
+
+            <a href="https://instagram.com/05a_kelly1" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#" id="whatsappFooter">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+        </div>
+
+        <p>
+            © 2026 Nail Studio. Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+         <!-- VISOR DE FOTOS -->
+
+    <div id="visorFoto" class="visor-foto" onclick="cerrarFoto()">
+
+         <span class="cerrar-foto">&times;</span>
+
+        <img id="fotoGrande" src="" alt="Foto ampliada">
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html> 
+
